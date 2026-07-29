@@ -1,0 +1,153 @@
+[gd_scene format=3 uid="uid://b6tvaxw54wsq0"]
+
+[ext_resource type="Script" uid="uid://tkynu7pd01lh" path="res://Scenes/Levels/menu.gd" id="1_hq2ph"]
+[ext_resource type="Script" uid="uid://ctfjumrakv4nk" path="res://Scenes/Levels/btn_continue.gd" id="2_7pnm7"]
+[ext_resource type="Script" uid="uid://di5d05cmkq8t5" path="res://Scenes/Levels/character_selection.gd" id="2_ju4x4"]
+[ext_resource type="Texture2D" uid="uid://dqqm10jand5vj" path="res://tori no uta.png" id="2_lli10"]
+[ext_resource type="AudioStream" uid="uid://b8vqeo35wihja" path="res://【殺戮の天使】 彼岸 BGM.mp3" id="5_rwfgf"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="6_dsa84"]
+
+[sub_resource type="Theme" id="Theme_ju4x4"]
+
+[sub_resource type="Theme" id="Theme_7pnm7"]
+
+[node name="Node2D" type="Node2D" unique_id=827773846]
+script = ExtResource("1_hq2ph")
+
+[node name="ToriNoUta" type="Sprite2D" parent="." unique_id=496560755]
+position = Vector2(573.5, 326.50003)
+scale = Vector2(0.8997651, 0.87919474)
+texture = ExtResource("2_lli10")
+
+[node name="UI" type="Control" parent="." unique_id=2061607031]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 524.0
+theme = SubResource("Theme_ju4x4")
+
+[node name="btnStart" type="Button" parent="UI" unique_id=843125025]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.5
+offset_top = 155.0
+offset_right = 78.5
+offset_bottom = 219.0
+grow_horizontal = 2
+text = "Start"
+
+[node name="btnContinue" type="Button" parent="UI" unique_id=922351197]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.5
+offset_top = 224.0
+offset_right = 78.5
+offset_bottom = 288.0
+grow_horizontal = 2
+text = "Continue"
+script = ExtResource("2_7pnm7")
+
+[node name="btnOption" type="Button" parent="UI" unique_id=606273451]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.0
+offset_top = 294.0
+offset_right = 78.0
+offset_bottom = 358.0
+grow_horizontal = 2
+text = "Option"
+
+[node name="btnCredit" type="Button" parent="UI" unique_id=378335107]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.5
+offset_top = 371.0
+offset_right = 78.5
+offset_bottom = 435.0
+grow_horizontal = 2
+text = "Credit"
+
+[node name="Character_Selection" type="Control" parent="UI" unique_id=233836320]
+anchors_preset = 0
+offset_left = 384.0
+offset_top = 119.0
+offset_right = 745.0
+offset_bottom = 564.0
+script = ExtResource("2_ju4x4")
+
+[node name="Fighter" type="Button" parent="UI/Character_Selection" unique_id=1875910965]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 183.0
+offset_right = 264.0
+offset_bottom = 259.0
+theme_override_colors/font_color = Color(0.9882353, 0.3019608, 0, 1)
+text = "Fighter"
+
+[node name="Samurai" type="Button" parent="UI/Character_Selection" unique_id=548107706]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 44.0
+offset_right = 341.0
+offset_bottom = 118.0
+theme_override_colors/font_color = Color(0.69743204, 0.9151633, 0.99382085, 1)
+text = "Samurai"
+
+[node name="Shinobi" type="Button" parent="UI/Character_Selection" unique_id=422561975]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 45.0
+offset_right = 156.0
+offset_bottom = 117.0
+theme = SubResource("Theme_7pnm7")
+theme_override_colors/font_color = Color(0, 0.32156864, 0.9764706, 1)
+text = "Shinobi"
+
+[node name="TextEdit" type="TextEdit" parent="UI/Character_Selection" unique_id=1892661199]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -14.0
+offset_right = 340.0
+offset_bottom = 19.0
+text = "                       Character Choosing 🥷"
+
+[node name="Label" type="Label" parent="." unique_id=489280417]
+offset_left = 446.0
+offset_top = 41.0
+offset_right = 683.0
+offset_bottom = 95.0
+theme_override_font_sizes/font_size = 25
+text = "Lab 04 Game DEMO"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1043389389]
+stream = ExtResource("5_rwfgf")
+
+[node name="Label2" type="Label" parent="." unique_id=1020207272]
+offset_left = 494.0
+offset_top = 581.0
+offset_right = 1368.0
+offset_bottom = 710.0
+theme = ExtResource("6_dsa84")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "This game currently  in prototype 
+might causing some bug i couldn't get it fixed or either i don't know how godot work
+so play as your personal enjoy 🙂
+"
+
+[connection signal="pressed" from="UI/btnStart" to="." method="_on_btn_start_pressed"]
+[connection signal="pressed" from="UI/btnContinue" to="." method="_on_btn_continue_pressed"]
+[connection signal="pressed" from="UI/btnOption" to="." method="_on_btn_option_pressed"]
+[connection signal="pressed" from="UI/btnCredit" to="." method="_on_btn_credit_pressed"]
+[connection signal="pressed" from="UI/Character_Selection/Fighter" to="." method="_on_fighter_pressed"]
+[connection signal="pressed" from="UI/Character_Selection/Samurai" to="." method="_on_samurai_pressed"]
+[connection signal="pressed" from="UI/Character_Selection/Shinobi" to="." method="_on_shinobi_pressed"]

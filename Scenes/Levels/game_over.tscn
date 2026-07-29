@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://c15tw24t3axhb"]
+
+[ext_resource type="Texture2D" uid="uid://dqwas4ptdk1y8" path="res://ayanokoji.jpg" id="1_cfvhd"]
+[ext_resource type="PackedScene" uid="uid://puc4l62gx6et" path="res://Scenes/Prefabs/button_exit.tscn" id="2_buq0o"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="2_chlux"]
+[ext_resource type="Texture2D" uid="uid://dj1i30stcjtqo" path="res://Sad rachel.jpg" id="4_rohwx"]
+
+[sub_resource type="GDScript" id="GDScript_xrivr"]
+resource_name = "Button_playagain"
+script/source = "extends Button
+
+@export var exitToScene : PackedScene
+
+func _ready() -> void:
+	pressed.connect(_on_pressed)
+
+func _on_pressed() -> void:
+	get_tree().paused = false
+	
+	# Reset score to 0, lives to 5, and HP to max for a fresh attempt
+	if GameManager and GameManager.has_method(\"reset_player_stats\"):
+		GameManager.reset_player_stats()
+	
+	# Load the stored level where the player died
+	if GameManager and GameManager.has_method(\"restart_current_level\"):
+		GameManager.restart_current_level()
+	elif exitToScene != null:
+		get_tree().change_scene_to_packed(exitToScene)
+	else:
+		get_tree().change_scene_to_file(\"res://Scenes/Levels/Level_01.tscn\")
+"
+
+[node name="GameOver" type="Node2D" unique_id=826370530]
+
+[node name="Ayanokoji" type="Sprite2D" parent="." unique_id=2035151257]
+position = Vector2(582, 321.49997)
+scale = Vector2(1.94, 0.7751479)
+texture = ExtResource("1_cfvhd")
+
+[node name="Title" type="Label" parent="." unique_id=1965507633]
+offset_left = 419.0
+offset_top = 227.0
+offset_right = 720.0
+offset_bottom = 259.0
+theme = ExtResource("2_chlux")
+theme_override_colors/font_color = Color(0.88235295, 0.18039216, 0.1882353, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btnExit" parent="." unique_id=1633606001 instance=ExtResource("2_buq0o")]
+offset_left = 438.0
+offset_top = 359.0
+offset_right = 564.0
+offset_bottom = 413.0
+text = "Exit to Menu"
+
+[node name="btnPlay" parent="." unique_id=1146872882 instance=ExtResource("2_buq0o")]
+offset_left = 597.0
+offset_top = 359.0
+offset_right = 723.0
+offset_bottom = 413.0
+shortcut = null
+text = "Play Again"
+script = SubResource("GDScript_xrivr")
+
+[node name="SadRachel" type="Sprite2D" parent="." unique_id=1497129276]
+position = Vector2(215.125, 185.625)
+scale = Vector2(0.46140936, 0.43568233)
+texture = ExtResource("4_rohwx")
+
+[node name="Label" type="Label" parent="." unique_id=990756563]
+offset_left = 33.0
+offset_top = 306.0
+offset_right = 388.0
+offset_bottom = 329.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Bro this game is easy af how could you lose 💔"

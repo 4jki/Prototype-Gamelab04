@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://cuq7vusmo7y5g"]
+
+[ext_resource type="PackedScene" uid="uid://puc4l62gx6et" path="res://Scenes/Prefabs/button_exit.tscn" id="1_6oxap"]
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="2_wto1r"]
+
+[sub_resource type="GDScript" id="GDScript_xrivr"]
+resource_name = "options"
+script/source = "extends Node2D
+
+@onready var volume_slider: HSlider = %VolumeSlider if has_node(\"%VolumeSlider\") else $VolumeSlider
+
+func _ready() -> void:
+	if volume_slider:
+		# Sync slider position to current Master bus volume
+		var master_idx = AudioServer.get_bus_index(\"Master\")
+		if master_idx != -1:
+			var current_db = AudioServer.get_bus_volume_db(master_idx)
+			volume_slider.value = db_to_linear(current_db)
+		
+		volume_slider.value_changed.connect(_on_volume_slider_value_changed)
+
+func _on_volume_slider_value_changed(value: float) -> void:
+	var db_value = linear_to_db(value)
+	var is_muted = value <= 0.005
+	
+	# List of buses to control (Master, Music, SFX)
+	var buses_to_update = [\"Master\", \"Music\", \"sfx\"]
+	
+	for bus_name in buses_to_update:
+		var bus_idx = AudioServer.get_bus_index(bus_name)
+		if bus_idx != -1:
+			AudioServer.set_bus_volume_db(bus_idx, db_value)
+			AudioServer.set_bus_mute(bus_idx, is_muted)
+			
+	# Debug print to verify slider changes in Output tab
+	print(\"Slider moved -> New dB level: \", db_value)
+"
+
+[node name="Node2D" type="Node2D" unique_id=156805935]
+script = SubResource("GDScript_xrivr")
+
+[node name="btnExit" parent="." unique_id=1633606001 instance=ExtResource("1_6oxap")]
+offset_left = 48.0
+offset_top = 32.0
+offset_right = 174.0
+offset_bottom = 86.0
+
+[node name="Title" type="Label" parent="." unique_id=714304452]
+offset_left = 412.0
+offset_top = 45.0
+offset_right = 713.0
+offset_bottom = 77.0
+theme = ExtResource("2_wto1r")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "Game Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="Title" unique_id=13516113]
+layout_mode = 0
+offset_left = -82.0
+offset_top = 134.0
+offset_right = 351.0
+offset_bottom = 166.0
+theme = ExtResource("2_wto1r")
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
+text = "No idea why the volume Adjust doesnt work 😭"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=979338764]
+offset_left = 196.0
+offset_top = 173.0
+offset_right = 314.0
+offset_bottom = 216.0
+
+[node name="VolumeLabel" type="Label" parent="VBoxContainer" unique_id=827297172]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer" unique_id=759427414]
+layout_mode = 2
+min_value = 0.001
+max_value = 1.0
+step = 0.05
+value = 1.0

@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://b46lxwc5r3dy4"]
+
+[ext_resource type="Theme" uid="uid://d3eng5cvycmjf" path="res://Scenes/Prefabs/theme.tres" id="1_5l1gm"]
+[ext_resource type="Texture2D" uid="uid://dbi5mdnhwnvnr" path="res://Moon.jpg" id="1_67x06"]
+[ext_resource type="PackedScene" uid="uid://puc4l62gx6et" path="res://Scenes/Prefabs/button_exit.tscn" id="2_81byk"]
+[ext_resource type="Texture2D" uid="uid://bfqnqxdcronke" path="res://ray.jpg" id="3_81byk"]
+[ext_resource type="Texture2D" uid="uid://b4bh5pjpapty7" path="res://thump_up-removebg-preview.png" id="4_67x06"]
+
+[node name="GameOver" type="Node2D" unique_id=826370530]
+
+[node name="Moon" type="Sprite2D" parent="." unique_id=1767196539]
+position = Vector2(573.5, 336.49997)
+scale = Vector2(1.9244965, 1.9671639)
+texture = ExtResource("1_67x06")
+
+[node name="Title" type="Label" parent="." unique_id=1965507633]
+offset_left = 438.0
+offset_top = 225.0
+offset_right = 742.0
+offset_bottom = 269.0
+theme = ExtResource("1_5l1gm")
+theme_override_colors/font_color = Color(0.36862746, 0.9137255, 0.1882353, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 33
+text = "You Win"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btnExit" parent="." unique_id=1633606001 instance=ExtResource("2_81byk")]
+offset_left = 526.0
+offset_top = 353.0
+offset_right = 652.0
+offset_bottom = 407.0
+text = "Exit to Menu"
+
+[node name="Ray" type="Sprite2D" parent="." unique_id=774739478]
+position = Vector2(198.37498, 192.25)
+scale = Vector2(0.32213545, 0.33177084)
+texture = ExtResource("3_81byk")
+
+[node name="ThumpUpRemovebgPreview" type="Sprite2D" parent="." unique_id=208412797]
+position = Vector2(99.99999, 229)
+scale = Vector2(0.36755484, 0.3841853)
+texture = ExtResource("4_67x06")
+
+[node name="Label" type="Label" parent="." unique_id=1165209843]
+offset_left = 14.0
+offset_top = 422.0
+offset_right = 525.0
+offset_bottom = 445.0
+theme_override_colors/font_color = Color(0.88104755, 4.6205523e-06, 0.5505999, 1)
+text = "Damn youre so good at this game here some thump up for you 👍
+im so pound of you"
